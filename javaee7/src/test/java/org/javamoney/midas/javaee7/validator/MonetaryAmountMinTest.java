@@ -97,7 +97,7 @@ public class MonetaryAmountMinTest {
 	}
 
 	@Test
-	public void shouldReturnsEmptyConstrainsWhenMonetaryGreaterThanMimimum() {
+	public void shouldReturnsEmptyConstrainsWhenMonetaryIsGreaterThanMimimum() {
 		   MonetaryAmountValidator currency = new MonetaryAmountValidator(Money.of(20, Monetary.getCurrency("BRL")));
 		   Set<ConstraintViolation<MonetaryAmountValidator>> constraintViolations =
 				      validator.validate(currency);
