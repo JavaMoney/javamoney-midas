@@ -8,13 +8,13 @@ import java.util.Locale;
 import javax.money.CurrencyUnit;
 import javax.money.Monetary;
 
-class CurrencyConverter {
+class CurrencyReaderConverter {
 
 	private final List<CurrencyUnit> acceptedCurrencies = new ArrayList<>();
 	
 	private final List<CurrencyUnit> rejectedCurrencies = new ArrayList<>();
 	
-	public CurrencyConverter(Currency currency) {
+	public CurrencyReaderConverter(Currency currency) {
 		
 		acceptedCurrencies.addAll(createCurrencyList(currency.acceptedCurrencies()));
 		acceptedCurrencies.addAll(createCurrencyListFromLocale(currency.acceptedCurrenciesFromLocales()));

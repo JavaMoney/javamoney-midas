@@ -11,7 +11,7 @@ import javax.money.Monetary;
 
 import org.hamcrest.Matchers;
 import org.javamoney.midas.javaee7.validator.Currency;
-import org.javamoney.midas.javaee7.validator.CurrencyConverter;
+import org.javamoney.midas.javaee7.validator.CurrencyReaderConverter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +19,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CurrencyUnitValidatorTest {
+public class CurrencyReaderConverterTest {
 
 
 	@Mock
@@ -36,7 +36,7 @@ public class CurrencyUnitValidatorTest {
 
 	@Test
 	public void shouldReturnsEmptyAcceptedAndRejectedListWhenCurrencyCodeIsEmpty(){
-		CurrencyConverter converter = new CurrencyConverter(currency);
+		CurrencyReaderConverter converter = new CurrencyReaderConverter(currency);
 
 		assertTrue(converter.getAcceptedCurrencies().isEmpty());
 		assertTrue(converter.getRejectedCurrencies().isEmpty());
@@ -47,7 +47,7 @@ public class CurrencyUnitValidatorTest {
 		when(currency.acceptedCurrencies()).thenReturn(new String[]{"BRL"});
 		when(currency.rejectedCurrencies()).thenReturn(new String[]{"BRL"});
 
-		CurrencyConverter converter = new CurrencyConverter(currency);
+		CurrencyReaderConverter converter = new CurrencyReaderConverter(currency);
 		assertFalse(converter.getAcceptedCurrencies().isEmpty());
 		assertFalse(converter.getRejectedCurrencies().isEmpty());
 
@@ -62,7 +62,7 @@ public class CurrencyUnitValidatorTest {
 		when(currency.acceptedCurrencies()).thenReturn(new String[]{"BRL","USD"});
 		when(currency.rejectedCurrencies()).thenReturn(new String[]{"BRL","USD"});
 
-		CurrencyConverter converter = new CurrencyConverter(currency);
+		CurrencyReaderConverter converter = new CurrencyReaderConverter(currency);
 		assertFalse(converter.getAcceptedCurrencies().isEmpty());
 		assertFalse(converter.getRejectedCurrencies().isEmpty());
 
@@ -77,7 +77,7 @@ public class CurrencyUnitValidatorTest {
 	@Test
 	public void shouldReturnsEmptyAcceptedAndRejectedListWhenLocaleIsEmpty(){
 
-		CurrencyConverter converter = new CurrencyConverter(currency);
+		CurrencyReaderConverter converter = new CurrencyReaderConverter(currency);
 
 		assertTrue(converter.getAcceptedCurrencies().isEmpty());
 		assertTrue(converter.getRejectedCurrencies().isEmpty());
@@ -89,7 +89,7 @@ public class CurrencyUnitValidatorTest {
 		when(currency.acceptedCurrenciesFromLocales()).thenReturn(new String[]{"en_US"});
 		when(currency.rejectedCurrenciesFromLocales()).thenReturn(new String[]{"en_US"});
 
-		CurrencyConverter converter = new CurrencyConverter(currency);
+		CurrencyReaderConverter converter = new CurrencyReaderConverter(currency);
 		assertFalse(converter.getAcceptedCurrencies().isEmpty());
 		assertFalse(converter.getRejectedCurrencies().isEmpty());
 
@@ -105,7 +105,7 @@ public class CurrencyUnitValidatorTest {
 		when(currency.acceptedCurrenciesFromLocales()).thenReturn(new String[]{"en_US","en_GB"});
 		when(currency.rejectedCurrenciesFromLocales()).thenReturn(new String[]{"en_US","en_GB"});
 
-		CurrencyConverter converter = new CurrencyConverter(currency);
+		CurrencyReaderConverter converter = new CurrencyReaderConverter(currency);
 		assertFalse(converter.getAcceptedCurrencies().isEmpty());
 		assertFalse(converter.getRejectedCurrencies().isEmpty());
 
@@ -119,7 +119,7 @@ public class CurrencyUnitValidatorTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void shouldReturnsErrorOnElementsAcceptedWhenLocaleIsWrong(){
 		when(currency.acceptedCurrenciesFromLocales()).thenReturn(new String[]{"en"});
-		new CurrencyConverter(currency);
+		new CurrencyReaderConverter(currency);
 	}
 
 }
