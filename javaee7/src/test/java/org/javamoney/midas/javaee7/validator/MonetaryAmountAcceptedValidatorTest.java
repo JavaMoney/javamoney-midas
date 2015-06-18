@@ -1,21 +1,22 @@
 package org.javamoney.midas.javaee7.validator;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.util.Locale;
 import java.util.Set;
 
-import javax.money.CurrencyUnit;
 import javax.money.Monetary;
+import javax.money.MonetaryAmount;
 import javax.validation.ConstraintValidatorContext;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.javamoney.moneta.Money;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -25,7 +26,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CurrencyAcceptedValidatorTest {
+public class MonetaryAmountAcceptedValidatorTest {
+
 
 	private static Validator validator;
 
@@ -35,7 +37,7 @@ public class CurrencyAcceptedValidatorTest {
 		validator = factory.getValidator();
 	}
 
-	private CurrencyAcceptedValidator currencyValidator;
+	private MonetaryAmountAcceptedValidator monetaryAmountValidator;
 
 	@Mock
 	private CurrencyAccepted constraintAnnotation;
@@ -46,43 +48,45 @@ public class CurrencyAcceptedValidatorTest {
 	public void setup() {
 		when(constraintAnnotation.currencies()).thenReturn(new String[0]);
 		when(constraintAnnotation.currenciesFromLocales()).thenReturn(new String[0]);
-		currencyValidator = new CurrencyAcceptedValidator();
+		monetaryAmountValidator = new MonetaryAmountAcceptedValidator();
 	}
 
 
 	@Test
 	public void shouldReturnsTrueWhenCurrecyIsNull() {
-		Assert.assertTrue(currencyValidator.isValid(null, context));
+		Assert.assertTrue(monetaryAmountValidator.isValid(null, context));
 	}
 
 	@Test
 	public void shouldReturnsTrueWhenCurrencyIsAllowed() {
 		String currencyCodAllowed = "USD";
 		when(constraintAnnotation.currencies()).thenReturn(new String[]{currencyCodAllowed});
-		currencyValidator.initialize(constraintAnnotation);
-		assertTrue(currencyValidator.isValid(Monetary.getCurrency(currencyCodAllowed), context));
+		monetaryAmountValidator.initialize(constraintAnnotation);
+
+		assertTrue(monetaryAmountValidator.isValid(Money.of(10,Monetary.getCurrency(currencyCodAllowed)), context));
 	}
 
 	@Test
 	public void shouldReturnsFalseWhenCurrencyIsDenied() {
 		String currencyCodAllowed = "USD";
 		when(constraintAnnotation.currencies()).thenReturn(new String[]{currencyCodAllowed});
-		currencyValidator.initialize(constraintAnnotation);
-		assertFalse(currencyValidator.isValid(Monetary.getCurrency("EUR"), context));
+		monetaryAmountValidator.initialize(constraintAnnotation);
+		assertFalse(monetaryAmountValidator.isValid(Money.of(10, Monetary.getCurrency("EUR")), context));
 	}
 
-	  @Test
+	@Test
 	   public void shouldReturnsEmptyConstrainsWhenCurrencyIsNull(){
-		   CurrencyValidator currency = new CurrencyValidator(null);
-		   Set<ConstraintViolation<CurrencyValidator>> constraintViolations =
+		  MonetaryAmountValidator currency = new MonetaryAmountValidator(null);
+		   Set<ConstraintViolation<MonetaryAmountValidator>> constraintViolations =
 				      validator.validate(currency);
 		   assertTrue(constraintViolations.isEmpty());
 	   }
 
 	   @Test
 	   public void shouldReturnsEmptyConstrainsWhenCurrencyIsAllowed(){
-		   CurrencyValidator currency = new CurrencyValidator(Monetary.getCurrency("BRL"));
-		   Set<ConstraintViolation<CurrencyValidator>> constraintViolations =
+
+		   MonetaryAmountValidator currency = new MonetaryAmountValidator(Money.of(10, Monetary.getCurrency("BRL")));
+		   Set<ConstraintViolation<MonetaryAmountValidator>> constraintViolations =
 				      validator.validate(currency);
 		   assertTrue(constraintViolations.isEmpty());
 	   }
@@ -90,24 +94,24 @@ public class CurrencyAcceptedValidatorTest {
 
 	   @Test
 	   public void shouldReturnsConstrainsWhenCurrencyDenied(){
-		   CurrencyValidator currency = new CurrencyValidator(Monetary.getCurrency(Locale.US));
-		   Set<ConstraintViolation<CurrencyValidator>> constraintViolations =
+
+		   MonetaryAmountValidator currency = new MonetaryAmountValidator(Money.of(10, Monetary.getCurrency(Locale.US)));
+		   Set<ConstraintViolation<MonetaryAmountValidator>> constraintViolations =
 				      validator.validate(currency);
 
 		   assertTrue(constraintViolations.size() == 1);
 		   assertEquals("{org.javamoney.midas.constraints.currencyAccepted}", constraintViolations.iterator().next().getMessageTemplate());
 	   }
 
-	private class CurrencyValidator {
+	private class MonetaryAmountValidator {
 
 		@CurrencyAccepted(currencies = "BRL")
-		private CurrencyUnit currencyUnit;
+		private MonetaryAmount money;
 
-		CurrencyValidator(CurrencyUnit currencyUnit) {
-			this.currencyUnit = currencyUnit;
+		MonetaryAmountValidator(MonetaryAmount money) {
+			this.money = money;
 		}
 
 	}
-
 
 }

@@ -14,7 +14,7 @@ import javax.validation.Payload;
 
 @Target( { METHOD, FIELD, ANNOTATION_TYPE })
 @Retention(RUNTIME)
-@Constraint(validatedBy = CurrencyAcceptedValidator.class)
+@Constraint(validatedBy = {CurrencyAcceptedValidator.class, MonetaryAmountAcceptedValidator.class})
 @Documented
 public @interface CurrencyAccepted {
 
