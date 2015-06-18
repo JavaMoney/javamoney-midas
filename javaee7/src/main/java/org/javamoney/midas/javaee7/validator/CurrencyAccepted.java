@@ -18,20 +18,20 @@ import javax.validation.Payload;
 @Documented
 public @interface CurrencyAccepted {
 
-	String message() default "{org.javamoney.midas.constraints.currencyUnit}";
+	String message() default "{org.javamoney.midas.constraints.currencyAccepted}";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 
     /**
-     * Informs the currencies that will be allowed using the locale where the currency the currency code.
+     * Informs the currency code.
      * Ex: 'USD', 'BRL', 'EUR'
      * @return currencies allowed using the currency code
      */
     String[] currencies() default "";
     /**
-     * Informs the currencies that will be allowed using the locale where the currency is from.
+     * Informs the Locale where the currencies are from.
      * Ex: 'en_US','pt_BR', 'en_GB'
      * @return currencies allowed using the currency code
      */

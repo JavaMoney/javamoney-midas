@@ -20,7 +20,7 @@ class CurrencyReaderConverter {
 
 
 	private List<CurrencyUnit> createCurrencyList(String[] currenciesTexts) {
-		if (currenciesTexts.length == 0) {
+		if (isEmptyArray(currenciesTexts)) {
 			return Collections.emptyList();
 		}
 		List<CurrencyUnit> currenciesFromCode = new ArrayList<>();
@@ -30,10 +30,15 @@ class CurrencyReaderConverter {
 		return currenciesFromCode;
 	}
 
+
+	private boolean isEmptyArray(String[] currenciesTexts) {
+		return currenciesTexts.length == 0 || currenciesTexts.length == 1 && currenciesTexts[0].isEmpty();
+	}
+
 	private List<CurrencyUnit> createCurrencyListFromLocale(
 			String[] currenciesTexts) {
 
-		if (currenciesTexts.length == 0) {
+		if (isEmptyArray(currenciesTexts)) {
 			return Collections.emptyList();
 		}
 		List<CurrencyUnit> currenciesFromLocale = new ArrayList<>();
