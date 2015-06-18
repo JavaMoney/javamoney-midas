@@ -51,4 +51,8 @@
         </dependency>
 
     </dependencies>
+    
+    <modules>
+        <module>javaee7</module>
+    </modules>
 </project>
