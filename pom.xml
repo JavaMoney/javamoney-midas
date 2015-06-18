@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <version>1.0</version>
+        <groupId>org.javamoney</groupId>
+        <artifactId>javamoney-parent</artifactId>
+    </parent>
+    <artifactId>javamoney-midas</artifactId>
+    <groupId>org.javamoney.midas</groupId>
+    <name>JavaMoney Midas (parent)</name>
+    <packaging>pom</packaging>
+    <version>0.1-SNAPSHOT</version>
+    <properties>
+        <jsr.version>1.0</jsr.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <licenses>
+        <license>
+            <name>Apache License version 2.0</name>
+            <url>LICENSE.txt</url>
+        </license>
+    </licenses>
+</project>
