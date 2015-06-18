@@ -17,8 +17,8 @@ import javax.validation.Payload;
 @Constraint(validatedBy = MonetaryAmountMinValidator.class)
 @Documented
 /**
- *Informs the currencies that are allowed on validation.
- *This annotation works with MonetaryAmount and CurrencyUnit.
+ *Informs the minimum value of a {@link MonetaryAmount}.
+ *To do the comparison is used the {@link MonetaryAmount#isGreaterThanOrEqualTo(MonetaryAmount)
  * @author Otavio Santana
  */
 public @interface MonetaryMin {
