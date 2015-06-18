@@ -18,6 +18,11 @@ class CurrencyReaderConverter {
 
 	}
 
+	public CurrencyReaderConverter(CurrencyRejected currency) {
+		currencies.addAll(createCurrencyList(currency.currencies()));
+		currencies.addAll(createCurrencyListFromLocale(currency.currenciesFromLocales()));
+	}
+
 
 	private List<CurrencyUnit> createCurrencyList(String[] currenciesTexts) {
 		if (isEmptyArray(currenciesTexts)) {
