@@ -10,7 +10,7 @@ import java.util.Locale;
 import javax.money.Monetary;
 
 import org.hamcrest.Matchers;
-import org.javamoney.midas.javaee7.validator.Currency;
+import org.javamoney.midas.javaee7.validator.CurrencyAccepted;
 import org.javamoney.midas.javaee7.validator.CurrencyReaderConverter;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,53 +23,40 @@ public class CurrencyReaderConverterTest {
 
 
 	@Mock
-	private Currency currency;
+	private CurrencyAccepted currency;
 
 	@Before
 	public void setup() {
-		when(currency.acceptedCurrencies()).thenReturn(new String[0]);
-		when(currency.rejectedCurrencies()).thenReturn(new String[0]);
+		when(currency.currencies()).thenReturn(new String[0]);
+		when(currency.currenciesFromLocales()).thenReturn(new String[0]);
 
-		when(currency.acceptedCurrenciesFromLocales()).thenReturn(new String[0]);
-		when(currency.rejectedCurrenciesFromLocales()).thenReturn(new String[0]);
 	}
 
 	@Test
 	public void shouldReturnsEmptyAcceptedAndRejectedListWhenCurrencyCodeIsEmpty(){
 		CurrencyReaderConverter converter = new CurrencyReaderConverter(currency);
-
-		assertTrue(converter.getAcceptedCurrencies().isEmpty());
-		assertTrue(converter.getRejectedCurrencies().isEmpty());
+		assertTrue(converter.getCurrencies().isEmpty());
 	}
 
 	@Test
 	public void shouldReturnsOneElementAcceptedAndRejectedListWhenCurrencyCodeHasOneElement(){
-		when(currency.acceptedCurrencies()).thenReturn(new String[]{"BRL"});
-		when(currency.rejectedCurrencies()).thenReturn(new String[]{"BRL"});
+		when(currency.currencies()).thenReturn(new String[]{"BRL"});
 
 		CurrencyReaderConverter converter = new CurrencyReaderConverter(currency);
-		assertFalse(converter.getAcceptedCurrencies().isEmpty());
-		assertFalse(converter.getRejectedCurrencies().isEmpty());
+		assertFalse(converter.getCurrencies().isEmpty());
 
-		assertThat(converter.getAcceptedCurrencies().toArray(),
-				Matchers.arrayContaining(Monetary.getCurrency("BRL")));
-		assertThat(converter.getRejectedCurrencies().toArray(),
+		assertThat(converter.getCurrencies().toArray(),
 				Matchers.arrayContaining(Monetary.getCurrency("BRL")));
 	}
 
 	@Test
 	public void shouldReturnsElementsAcceptedAndRejectedListWhenCurrencyCodeHasElements(){
-		when(currency.acceptedCurrencies()).thenReturn(new String[]{"BRL","USD"});
-		when(currency.rejectedCurrencies()).thenReturn(new String[]{"BRL","USD"});
+		when(currency.currencies()).thenReturn(new String[]{"BRL","USD"});
 
 		CurrencyReaderConverter converter = new CurrencyReaderConverter(currency);
-		assertFalse(converter.getAcceptedCurrencies().isEmpty());
-		assertFalse(converter.getRejectedCurrencies().isEmpty());
+		assertFalse(converter.getCurrencies().isEmpty());
 
-		assertThat(converter.getAcceptedCurrencies().toArray(),
-				Matchers.arrayContaining(Monetary.getCurrency("BRL"), Monetary.getCurrency("USD")));
-
-		assertThat(converter.getRejectedCurrencies().toArray(),
+		assertThat(converter.getCurrencies().toArray(),
 				Matchers.arrayContaining(Monetary.getCurrency("BRL"), Monetary.getCurrency("USD")));
 	}
 
@@ -78,47 +65,36 @@ public class CurrencyReaderConverterTest {
 	public void shouldReturnsEmptyAcceptedAndRejectedListWhenLocaleIsEmpty(){
 
 		CurrencyReaderConverter converter = new CurrencyReaderConverter(currency);
-
-		assertTrue(converter.getAcceptedCurrencies().isEmpty());
-		assertTrue(converter.getRejectedCurrencies().isEmpty());
+		assertTrue(converter.getCurrencies().isEmpty());
 	}
 
 	@Test
 	public void shouldReturnsOneElementAcceptedAndRejectedListWhenLocaleHasOneElement(){
 
-		when(currency.acceptedCurrenciesFromLocales()).thenReturn(new String[]{"en_US"});
-		when(currency.rejectedCurrenciesFromLocales()).thenReturn(new String[]{"en_US"});
+		when(currency.currenciesFromLocales()).thenReturn(new String[]{"en_US"});
 
 		CurrencyReaderConverter converter = new CurrencyReaderConverter(currency);
-		assertFalse(converter.getAcceptedCurrencies().isEmpty());
-		assertFalse(converter.getRejectedCurrencies().isEmpty());
+		assertFalse(converter.getCurrencies().isEmpty());
 
-		assertThat(converter.getAcceptedCurrencies().toArray(),
-				Matchers.arrayContaining(Monetary.getCurrency(Locale.US)));
-		assertThat(converter.getRejectedCurrencies().toArray(),
+		assertThat(converter.getCurrencies().toArray(),
 				Matchers.arrayContaining(Monetary.getCurrency(Locale.US)));
 	}
 
 	@Test
 	public void shouldReturnsElementsAcceptedAndRejectedListWhenLocaleHasElements(){
 
-		when(currency.acceptedCurrenciesFromLocales()).thenReturn(new String[]{"en_US","en_GB"});
-		when(currency.rejectedCurrenciesFromLocales()).thenReturn(new String[]{"en_US","en_GB"});
+		when(currency.currenciesFromLocales()).thenReturn(new String[]{"en_US","en_GB"});
 
 		CurrencyReaderConverter converter = new CurrencyReaderConverter(currency);
-		assertFalse(converter.getAcceptedCurrencies().isEmpty());
-		assertFalse(converter.getRejectedCurrencies().isEmpty());
+		assertFalse(converter.getCurrencies().isEmpty());
 
-		assertThat(converter.getAcceptedCurrencies().toArray(),
-				Matchers.arrayContaining(Monetary.getCurrency(Locale.US), Monetary.getCurrency(Locale.UK)));
-
-		assertThat(converter.getRejectedCurrencies().toArray(),
+		assertThat(converter.getCurrencies().toArray(),
 				Matchers.arrayContaining(Monetary.getCurrency(Locale.US), Monetary.getCurrency(Locale.UK)));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void shouldReturnsErrorOnElementsAcceptedWhenLocaleIsWrong(){
-		when(currency.acceptedCurrenciesFromLocales()).thenReturn(new String[]{"en"});
+		when(currency.currenciesFromLocales()).thenReturn(new String[]{"en"});
 		new CurrencyReaderConverter(currency);
 	}
 

@@ -10,57 +10,48 @@ import javax.money.Monetary;
 
 class CurrencyReaderConverter {
 
-	private final List<CurrencyUnit> acceptedCurrencies = new ArrayList<>();
-	
-	private final List<CurrencyUnit> rejectedCurrencies = new ArrayList<>();
-	
-	public CurrencyReaderConverter(Currency currency) {
-		
-		acceptedCurrencies.addAll(createCurrencyList(currency.acceptedCurrencies()));
-		acceptedCurrencies.addAll(createCurrencyListFromLocale(currency.acceptedCurrenciesFromLocales()));
-		
-		rejectedCurrencies.addAll(createCurrencyList(currency.rejectedCurrencies()));
-		rejectedCurrencies.addAll(createCurrencyListFromLocale(currency.rejectedCurrenciesFromLocales()));
+	private final List<CurrencyUnit> currencies = new ArrayList<>();
+
+	public CurrencyReaderConverter(CurrencyAccepted currency) {
+		currencies.addAll(createCurrencyList(currency.currencies()));
+		currencies.addAll(createCurrencyListFromLocale(currency.currenciesFromLocales()));
+
 	}
-	
-	
+
+
 	private List<CurrencyUnit> createCurrencyList(String[] currenciesTexts) {
 		if (currenciesTexts.length == 0) {
 			return Collections.emptyList();
 		}
-		List<CurrencyUnit> currencies = new ArrayList<>();
+		List<CurrencyUnit> currenciesFromCode = new ArrayList<>();
 		for (String value : currenciesTexts) {
-			currencies.add(Monetary.getCurrency(value.trim()));
+			currenciesFromCode.add(Monetary.getCurrency(value.trim()));
 		}
-		return currencies;
+		return currenciesFromCode;
 	}
-	
+
 	private List<CurrencyUnit> createCurrencyListFromLocale(
 			String[] currenciesTexts) {
-		
+
 		if (currenciesTexts.length == 0) {
 			return Collections.emptyList();
 		}
-		List<CurrencyUnit> currencies = new ArrayList<>();
+		List<CurrencyUnit> currenciesFromLocale = new ArrayList<>();
 		for (String value : currenciesTexts) {
 			String[] aux = value.split("_");
 			if (aux.length == 2) {
-				currencies
+				currenciesFromLocale
 						.add(Monetary.getCurrency(new Locale(aux[0], aux[1])));
 			} else {
 				throw new IllegalArgumentException(
 						"On error happened on parameter: " + value);
 			}
 		}
+		return currenciesFromLocale;
+	}
+
+	List<CurrencyUnit> getCurrencies() {
 		return currencies;
 	}
 
-	List<CurrencyUnit> getAcceptedCurrencies() {
-		return acceptedCurrencies;
-	}
-
-	List<CurrencyUnit> getRejectedCurrencies() {
-		return rejectedCurrencies;
-	}
-	
 }

@@ -14,38 +14,26 @@ import javax.validation.Payload;
 
 @Target( { METHOD, FIELD, ANNOTATION_TYPE })
 @Retention(RUNTIME)
-@Constraint(validatedBy = CurrencyUnitValidator.class)
+@Constraint(validatedBy = CurrencyAcceptedValidator.class)
 @Documented
-public @interface Currency {
+public @interface CurrencyRejected {
 
 	String message() default "{org.javamoney.midas.constraints.currencyUnit}";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-    
+
     /**
      * Informs the currencies that will be allowed using the locale where the currency the currency code.
      * Ex: 'USD', 'BRL', 'EUR'
      * @return currencies allowed using the currency code
      */
-    String[] acceptedCurrencies() default "";
+    String[] currencies() default "";
     /**
      * Informs the currencies that will be allowed using the locale where the currency is from.
      * Ex: 'en_US','pt_BR', 'en_GB'
      * @return currencies allowed using the currency code
      */
-    String[] acceptedCurrenciesFromLocales() default "";
-    /**
-     * Informs the currencies that will be rejected using the locale where the currency the currency code.
-     * Ex: 'USD', 'BRL', 'EUR'
-     * @return currencies allowed using the currency code
-     */
-    String[] rejectedCurrencies() default "";
-    /**
-     * Informs the currencies that will be rejected using the locale where the currency is from.
-     * Ex: 'en_US','pt_BR', 'en_GB'
-     * @return currencies allowed using the currency code
-     */
-    String[] rejectedCurrenciesFromLocales() default "";
+    String[] currenciesfromLocales() default "";
 }
