@@ -38,7 +38,7 @@ public class CurrencyRejectedValidatorTest {
 	private CurrencyRejectedValidator currencyValidator;
 
 	@Mock
-	private CurrencyAccepted constraintAnnotation;
+	private CurrencyRejected constraintAnnotation;
 
 	private ConstraintValidatorContext context;
 
@@ -81,7 +81,7 @@ public class CurrencyRejectedValidatorTest {
 
 	   @Test
 	   public void shouldReturnsEmptyConstrainsWhenCurrencyIsAllowed(){
-		   CurrencyValidator currency = new CurrencyValidator(Monetary.getCurrency("BRL"));
+		   CurrencyValidator currency = new CurrencyValidator(Monetary.getCurrency(Locale.US));
 		   Set<ConstraintViolation<CurrencyValidator>> constraintViolations =
 				      validator.validate(currency);
 		   assertTrue(constraintViolations.isEmpty());
@@ -90,17 +90,17 @@ public class CurrencyRejectedValidatorTest {
 
 	   @Test
 	   public void shouldReturnsConstrainsWhenCurrencyDenied(){
-		   CurrencyValidator currency = new CurrencyValidator(Monetary.getCurrency(Locale.US));
+		   CurrencyValidator currency = new CurrencyValidator(Monetary.getCurrency("BRL"));
 		   Set<ConstraintViolation<CurrencyValidator>> constraintViolations =
 				      validator.validate(currency);
 
 		   assertTrue(constraintViolations.size() == 1);
-		   assertEquals("{org.javamoney.midas.constraints.currencyAccepted}", constraintViolations.iterator().next().getMessageTemplate());
+		   assertEquals("{org.javamoney.midas.constraints.currencyRejected}", constraintViolations.iterator().next().getMessageTemplate());
 	   }
 
 	private class CurrencyValidator {
 
-		@CurrencyAccepted(currencies = "BRL")
+		@CurrencyRejected(currencies = "BRL")
 		private CurrencyUnit currencyUnit;
 
 		CurrencyValidator(CurrencyUnit currencyUnit) {

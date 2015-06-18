@@ -13,13 +13,13 @@ import javax.money.MonetaryAmount;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class MonetaryAmountRejectedValidator implements ConstraintValidator<CurrencyAccepted, MonetaryAmount>{
+public class MonetaryAmountRejectedValidator implements ConstraintValidator<CurrencyRejected, MonetaryAmount>{
 
 
 	private final List<CurrencyUnit> currencies = new ArrayList<>();
 
 	@Override
-	public void initialize(CurrencyAccepted constraintAnnotation) {
+	public void initialize(CurrencyRejected constraintAnnotation) {
 		CurrencyReaderConverter reader = new CurrencyReaderConverter(constraintAnnotation);
 		currencies.addAll(reader.getCurrencies());
 		sort(currencies);

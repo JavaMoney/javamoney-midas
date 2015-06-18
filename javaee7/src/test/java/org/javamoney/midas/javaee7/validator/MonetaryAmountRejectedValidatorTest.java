@@ -1,8 +1,8 @@
 package org.javamoney.midas.javaee7.validator;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.util.Locale;
@@ -40,7 +40,7 @@ public class MonetaryAmountRejectedValidatorTest {
 	private MonetaryAmountRejectedValidator monetaryAmountValidator;
 
 	@Mock
-	private CurrencyAccepted constraintAnnotation;
+	private CurrencyRejected constraintAnnotation;
 
 	private ConstraintValidatorContext context;
 
@@ -85,7 +85,7 @@ public class MonetaryAmountRejectedValidatorTest {
 	   @Test
 	   public void shouldReturnsEmptyConstrainsWhenCurrencyIsAllowed(){
 
-		   MonetaryAmountValidator currency = new MonetaryAmountValidator(Money.of(10, Monetary.getCurrency("BRL")));
+		   MonetaryAmountValidator currency = new MonetaryAmountValidator(Money.of(10, Monetary.getCurrency(Locale.US)));
 		   Set<ConstraintViolation<MonetaryAmountValidator>> constraintViolations =
 				      validator.validate(currency);
 		   assertTrue(constraintViolations.isEmpty());
@@ -95,17 +95,17 @@ public class MonetaryAmountRejectedValidatorTest {
 	   @Test
 	   public void shouldReturnsConstrainsWhenCurrencyDenied(){
 
-		   MonetaryAmountValidator currency = new MonetaryAmountValidator(Money.of(10, Monetary.getCurrency(Locale.US)));
+		   MonetaryAmountValidator currency = new MonetaryAmountValidator(Money.of(10, Monetary.getCurrency("BRL")));
 		   Set<ConstraintViolation<MonetaryAmountValidator>> constraintViolations =
 				      validator.validate(currency);
 
 		   assertTrue(constraintViolations.size() == 1);
-		   assertEquals("{org.javamoney.midas.constraints.currencyAccepted}", constraintViolations.iterator().next().getMessageTemplate());
+		   assertEquals("{org.javamoney.midas.constraints.currencyRejected}", constraintViolations.iterator().next().getMessageTemplate());
 	   }
 
 	private class MonetaryAmountValidator {
 
-		@CurrencyAccepted(currencies = "BRL")
+		@CurrencyRejected(currencies = "BRL")
 		private MonetaryAmount money;
 
 		MonetaryAmountValidator(MonetaryAmount money) {
