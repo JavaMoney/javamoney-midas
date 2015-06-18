@@ -10,9 +10,11 @@ import java.lang.annotation.Target;
 
 import javax.inject.Qualifier;
 
+import org.javamoney.moneta.convert.ExchangeRateType;
+
 @Target( { METHOD, FIELD, ANNOTATION_TYPE })
 @Retention(RUNTIME)
 @Qualifier
-public @interface MonetaryAmount {
-	MonetaryAmountType value() default MonetaryAmountType.MONEY;
+public @interface ExchangeRateQualifier {
+	ExchangeRateType value() default ExchangeRateType.ECB;
 }
