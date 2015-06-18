@@ -24,7 +24,13 @@
         </license>
     </licenses>
     
+    <dependencyManagement>
     <dependencies>
+         <dependency>
+            <groupId>org.javamoney</groupId>
+            <artifactId>moneta-bp</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>org.javamoney</groupId>
             <artifactId>moneta</artifactId>
@@ -51,6 +57,7 @@
         </dependency>
 
     </dependencies>
+    </dependencyManagement>
     
     <modules>
         <module>javaee7</module>
