@@ -5,8 +5,8 @@
 	<artifactId>javaee7</artifactId>
 	<packaging>jar</packaging>
 	<parent>
-		<artifactId>javamoney-midas</artifactId>
-		<groupId>org.javamoney.midas</groupId>
+               <artifactId>javamoney-midas</artifactId>
+                <groupId>org.javamoney.midas</groupId>
 		<version>0.1-SNAPSHOT</version>
 	</parent>
 	<properties>
