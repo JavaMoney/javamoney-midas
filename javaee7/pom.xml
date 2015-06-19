@@ -34,6 +34,7 @@
 	            <version>1.0.1-SNAPSHOT</version>
 	            <scope>provided</scope>
 	        </dependency>
+	        
 	        <dependency>
 	            <groupId>junit</groupId>
 	            <artifactId>junit</artifactId>
@@ -55,6 +56,4 @@
 	        </dependency>
 
     </dependencies>
-    
-	</dependencies>
 </project>
