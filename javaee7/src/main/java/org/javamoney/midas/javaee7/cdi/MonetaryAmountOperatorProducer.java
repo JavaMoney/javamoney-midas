@@ -5,7 +5,7 @@ import javax.money.MonetaryOperator;
 
 import org.javamoney.moneta.function.MonetaryOperators;
 
-class MonetaryAmountProducer {
+class MonetaryAmountOperatorProducer {
 
 	@Produces
 	public MonetaryOperator getRoundingDefault() {
