@@ -5,10 +5,11 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.money.MonetaryOperator;
 
-import org.javamoney.moneta.spi.FastMoneyProducer;
-import org.javamoney.moneta.spi.MonetaryAmountProducer;
-import org.javamoney.moneta.spi.MoneyProducer;
-import org.javamoney.moneta.spi.RoundedMoneyProducer;
+import org.javamoney.moneta.function.FastMoneyProducer;
+import org.javamoney.moneta.function.MonetaryAmountProducer;
+import org.javamoney.moneta.function.MoneyProducer;
+import org.javamoney.moneta.function.RoundedMoneyProducer;
+
 
 class ProducerFactory {
 
