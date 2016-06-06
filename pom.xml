@@ -2,9 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <version>1.0</version>
         <groupId>org.javamoney.shelter</groupId>
         <artifactId>javamoney-shelter</artifactId>
+        <version>0.6-SNAPSHOT</version>
     </parent>
     <artifactId>javamoney-midas</artifactId>
     <groupId>org.javamoney.midas</groupId>
