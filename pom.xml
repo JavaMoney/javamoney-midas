@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <version>1.0</version>
-        <groupId>org.javamoney</groupId>
-        <artifactId>javamoney-parent</artifactId>
+        <groupId>org.javamoney.shelter</groupId>
+        <artifactId>javamoney-shelter</artifactId>
     </parent>
     <artifactId>javamoney-midas</artifactId>
     <groupId>org.javamoney.midas</groupId>
