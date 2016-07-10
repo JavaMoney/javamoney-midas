@@ -2,13 +2,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.javamoney.shelter</groupId>
-        <artifactId>javamoney-shelter</artifactId>
-        <version>0.6-SNAPSHOT</version>
+        <groupId>org.javamoney</groupId>
+        <artifactId>javamoney-parent</artifactId>
+        <version>1.0</version>
     </parent>
-    <artifactId>javamoney-midas</artifactId>
+    <artifactId>midas-profiles</artifactId>
     <groupId>org.javamoney.midas</groupId>
-    <name>JavaMoney Midas (parent)</name>
+    <name>JavaMoney Midas Profiles</name>
     <packaging>pom</packaging>
     <version>0.1-SNAPSHOT</version>
     <properties>
@@ -27,4 +27,5 @@
     <modules>
         <module>javaee7</module>
     </modules>
+    <description>Midas is an attempt to create Monetary Profiles for Financial Micro Services on Java EE and similar environments.</description>
 </project>

@@ -4,9 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>javaee7</artifactId>
 	<packaging>jar</packaging>
+	<name>Midas Profile for Java EE 7</name>
 	<parent>
-               <artifactId>javamoney-midas</artifactId>
-                <groupId>org.javamoney.midas</groupId>
+		<artifactId>midas-profiles</artifactId>
+		<groupId>org.javamoney.midas</groupId>
 		<version>0.1-SNAPSHOT</version>
 	</parent>
 	<properties>
@@ -27,33 +28,32 @@
 			<version>5.1.3.Final</version>
 			<scope>provided</scope>
 		</dependency>
-  
-	        <dependency>
-	            <groupId>org.javamoney</groupId>
-	            <artifactId>moneta-bp</artifactId>
-	            <version>1.0.1-SNAPSHOT</version>
-	            <scope>provided</scope>
-	        </dependency>
-	        
-	        <dependency>
-	            <groupId>junit</groupId>
-	            <artifactId>junit</artifactId>
-		    <version>4.12</version>
-		    <scope>test</scope>
-	        </dependency>
-	        <dependency>
-	            <groupId>org.mockito</groupId>
-	            <artifactId>mockito-all</artifactId>
-	            <version>1.9.5</version>
-	            <scope>test</scope>
-	        </dependency>
-	        
-	        <dependency>
-	              <groupId>org.hamcrest</groupId>
-	              <artifactId>hamcrest-all</artifactId>
-	             <version>1.3</version>
-	             <scope>test</scope>
-	        </dependency>
 
-    </dependencies>
+		<dependency>
+			<groupId>org.javamoney</groupId>
+			<artifactId>moneta-bp</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.5</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>

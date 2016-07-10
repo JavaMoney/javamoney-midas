@@ -1,4 +1,4 @@
 # javamoney-midas
-Midas the project family targeting integrating JSR 354 with different runtime environments used in an enterprise context such as Java EE, Spring.and more.
+Midas is an attempt to create ***Monetary Profiles*** for Financial ***Micro Services*** on Java EE and similar environments.
 
-**To be moved into Shelter due to lack of Progress**.
+Building on top of Java EE, MicroProfile or others like Spring where appropriate.
