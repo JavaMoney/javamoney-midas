@@ -14,7 +14,7 @@ import javax.ws.rs.ext.Provider;
 public class CurrencyUnitConverterProvider implements ParamConverterProvider {
 
     @Override
-    public <T> ParamConverter<T> getConverter(Class<T> rawType, Type genericType, Annotation[] annotations) {
+    public <T> ParamConverter<T> getConverter(final Class<T> rawType, Type genericType, Annotation[] annotations) {
         if (CurrencyUnit.class.isInstance(rawType)) {
             return new ParamConverter<T>() {
                 @Override

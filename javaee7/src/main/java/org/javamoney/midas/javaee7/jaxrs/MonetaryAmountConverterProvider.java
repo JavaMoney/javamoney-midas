@@ -15,7 +15,7 @@ public class MonetaryAmountConverterProvider implements ParamConverterProvider {
 
 
     @Override
-    public <T> ParamConverter<T> getConverter(Class<T> rawType, Type genericType, Annotation[] annotations) {
+    public <T> ParamConverter<T> getConverter(final Class<T> rawType, Type genericType, Annotation[] annotations) {
         if (MonetaryAmount.class.isInstance(rawType)) {
             return new ParamConverter<T>() {
                 @Override
