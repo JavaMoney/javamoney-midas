@@ -10,7 +10,6 @@ import org.javamoney.moneta.function.MonetaryAmountProducer;
 import org.javamoney.moneta.function.MoneyProducer;
 import org.javamoney.moneta.function.RoundedMoneyProducer;
 
-
 class ProducerFactory {
 
 
