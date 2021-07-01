@@ -4,13 +4,14 @@
     <parent>
         <groupId>org.javamoney</groupId>
         <artifactId>javamoney-parent</artifactId>
-        <version>1.0</version>
+        <version>1.3</version>
     </parent>
     <artifactId>midas-profiles</artifactId>
     <groupId>org.javamoney.midas</groupId>
     <name>JavaMoney Midas Profiles</name>
     <packaging>pom</packaging>
     <version>0.1-SNAPSHOT</version>
+    <description>Midas is an attempt to create Monetary Profiles for Financial Micro Services on Java EE and similar environments.</description>    
     <properties>
         <jsr.version>1.0</jsr.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,5 +28,16 @@
     <modules>
         <module>javaee7</module>
     </modules>
-    <description>Midas is an attempt to create Monetary Profiles for Financial Micro Services on Java EE and similar environments.</description>
+    
+   	<!-- Deployment to public servers -->
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 </project>
